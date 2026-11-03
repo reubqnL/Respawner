@@ -33,12 +33,12 @@ export default {
 
         // embed to display the rank
         const rankEmbed = new EmbedBuilder()
-            .setColor(0x0099FF)
+            .setColor(0x9D00FF)
             .setTitle(`${interaction.user.username}'s Rank`)
             .setThumbnail(interaction.user.displayAvatarURL({ dynamic: true }))
             .addFields(
-                { name: 'Level', value: `${level}`, true: true },
-                { name: 'Total XP', value: `${xp}`, true: true },
+                { name: 'Level', value: `${level}`, inline: true },
+                { name: 'Total XP', value: `${xp}`, inline: true },
                 { name: 'Progress', value: `${currentLevelXp} / ${xpNeeded} XP to next level` }
             )
             .setTimestamp();
