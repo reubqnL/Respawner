@@ -23,22 +23,22 @@ export default {
         const stmt = db.prepare('SELECT xp, level FROM user_levels WHERE guild_id = ? AND user_id = ?');
         const row = stmt.get(guildId, userId);
 
-        // fallback
-        const xp = row ? row.xp : 0;
+        // fallback values
         const level = row ? row.level : 0;
+        const currentLevelXp = row ? row.xp : 0;
 
-        // calculate progress towards next level, 100 XP per level
+        const totalLifetimeXp = (level * 100) + currentLevelXp;
+
         const xpNeeded = 100;
-        const currentLevelXp = xp % xpNeeded;
 
         // embed to display the rank
         const rankEmbed = new EmbedBuilder()
-            .setColor(0x9D00FF)
+            .setColor(0x9D00FF) // Neon Violet
             .setTitle(`${interaction.user.username}'s Rank`)
             .setThumbnail(interaction.user.displayAvatarURL({ dynamic: true }))
             .addFields(
                 { name: 'Level', value: `${level}`, inline: true },
-                { name: 'Total XP', value: `${xp}`, inline: true },
+                { name: 'Total XP Overall', value: `${totalLifetimeXp} XP`, inline: true },
                 { name: 'Progress', value: `${currentLevelXp} / ${xpNeeded} XP to next level` }
             )
             .setTimestamp();
