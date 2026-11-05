@@ -1,6 +1,6 @@
 import Database from 'better-sqlite3';
 
-const db = new Database('bot_database.db');
+const db = new Database('database.sqlite');
 
 // mod logs table
 db.exec(`
